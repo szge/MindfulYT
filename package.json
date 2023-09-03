@@ -1,0 +1,25 @@
+{
+  "name": "focus-mode",
+  "version": "1.0.0",
+  "description": "Chrome extension that makes browsing YouTube more productive, relaxing, and intentional.",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szge/MindfulYT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szge/MindfulYT/issues"
+  },
+  "homepage": "https://github.com/szge/MindfulYT#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.0.244",
+    "typescript": "^5.2.2"
+  }
+}
