@@ -44,3 +44,7 @@ Avoid distractions on YouTube by blurring the thumbnails on the homepage.
 This repo is accepting PRs and feature requests. That being said, you are not allowed to redistribute it through any means.
 
 <a target="_blank" href="https://icons8.com/icon/80495/youtube">YouTube</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+## Privacy Policy
+
+We handle absolutely no user data.
