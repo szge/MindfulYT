@@ -1,0 +1,15 @@
+/* REMOVE UNNECESSARY CRAP */
+/* expanded view */
+ytd-guide-renderer > #sections > *:nth-child(2),
+ytd-guide-renderer > #sections > *:nth-child(3),
+ytd-guide-renderer > #sections > *:nth-child(4),
+ytd-guide-renderer > #footer,
+/* header with chips */
+#header,
+/* notification button */
+ytd-notification-topbar-button-renderer,
+/* all suggested videos except first two rows */
+#contents.ytd-rich-grid-renderer > *:nth-child(n+3)
+{
+    display: none !important;
+}

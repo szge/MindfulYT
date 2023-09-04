@@ -1,0 +1,5 @@
+/* DO NOT ALLOW USER TO WATCH SHORTS */
+ytd-page-manager
+{
+    display: none !important;
+}

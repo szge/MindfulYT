@@ -10,38 +10,72 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 chrome.runtime.onInstalled.addListener(() => {
     chrome.action.setBadgeText({
-        text: "OFF",
+        text: "ON",
     });
 });
-const youtube = 'https://www.youtube.com/';
-chrome.action.onClicked.addListener((tab) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    if ((_a = tab.url) === null || _a === void 0 ? void 0 : _a.startsWith(youtube)) {
-        console.log(tab);
-        // Retrieve the action badge to check if the extension is 'ON' or 'OFF'
-        const prevState = yield chrome.action.getBadgeText({ tabId: tab.id });
-        // Next state will always be the opposite
-        const nextState = prevState === 'ON' ? 'OFF' : 'ON';
-        // Set the action badge to the next state
-        yield chrome.action.setBadgeText({
-            tabId: tab.id,
-            text: nextState,
-        });
-        if (tab.id === undefined)
-            return;
-        if (nextState === "ON") {
-            // Insert the CSS file when the user turns the extension on
-            yield chrome.scripting.insertCSS({
-                files: ["focus-mode.css"],
-                target: { tabId: tab.id },
-            });
-        }
-        else if (nextState === "OFF") {
-            // Remove the CSS file when the user turns the extension off
-            yield chrome.scripting.removeCSS({
-                files: ["focus-mode.css"],
-                target: { tabId: tab.id },
-            });
-        }
+const YOUTUBE = "https://www.youtube.com/";
+const SHORTS = "https://www.youtube.com/shorts";
+const MAIN_CSS = ["styles/shorts.css", "styles/focus-mode.css"];
+const SHORTS_CSS = ["styles/nuke-shorts.css", "styles/shorts.css", "styles/focus-mode.css"];
+// automatically turn on the extension
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status === "complete") {
+        console.log("tab updated");
+        update(tab);
     }
+});
+chrome.action.onClicked.addListener((tab) => __awaiter(void 0, void 0, void 0, function* () {
+    const prevState = yield chrome.action.getBadgeText({ tabId: tab.id });
+    const nextState = prevState === "ON" ? "OFF" : "ON";
+    yield chrome.action.setBadgeText({
+        tabId: tab.id,
+        text: nextState,
+    });
+    update(tab);
 }));
+function update(tab) {
+    var _a, _b, _c, _d;
+    return __awaiter(this, void 0, void 0, function* () {
+        if (((_a = tab.url) === null || _a === void 0 ? void 0 : _a.startsWith(YOUTUBE)) && tab.id !== undefined) {
+            // get the current state of the extension
+            const currentState = yield chrome.action.getBadgeText({
+                tabId: tab.id,
+            });
+            if ((_b = tab.url) === null || _b === void 0 ? void 0 : _b.startsWith(SHORTS)) {
+                if (currentState === "ON") {
+                    // Insert the CSS file when the user turns the extension on
+                    yield chrome.scripting.insertCSS({
+                        files: SHORTS_CSS,
+                        target: { tabId: tab.id },
+                    });
+                    yield chrome.tabs.update(tab.id, { muted: true });
+                    console.log((_c = tab.mutedInfo) === null || _c === void 0 ? void 0 : _c.muted);
+                }
+                else if (currentState === "OFF") {
+                    // Remove the CSS file when the user turns the extension off
+                    yield chrome.scripting.removeCSS({
+                        files: SHORTS_CSS,
+                        target: { tabId: tab.id },
+                    });
+                    yield chrome.tabs.update(tab.id, { muted: false });
+                }
+            }
+            else if ((_d = tab.url) === null || _d === void 0 ? void 0 : _d.startsWith(YOUTUBE)) {
+                if (currentState === "ON") {
+                    // Insert the CSS file when the user turns the extension on
+                    yield chrome.scripting.insertCSS({
+                        files: MAIN_CSS,
+                        target: { tabId: tab.id },
+                    });
+                }
+                else if (currentState === "OFF") {
+                    // Remove the CSS file when the user turns the extension off
+                    yield chrome.scripting.removeCSS({
+                        files: MAIN_CSS,
+                        target: { tabId: tab.id },
+                    });
+                }
+            }
+        }
+    });
+}
