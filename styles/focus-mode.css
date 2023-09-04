@@ -4,12 +4,19 @@ ytd-guide-renderer > #sections > *:nth-child(2),
 ytd-guide-renderer > #sections > *:nth-child(3),
 ytd-guide-renderer > #sections > *:nth-child(4),
 ytd-guide-renderer > #footer,
-/* header with chips */
-#header,
+/* header with chips, except useful filter button */
+ytd-search-header-renderer > *:not(#filter-button),
+ytd-feed-filter-chip-bar-renderer,
 /* notification button */
 ytd-notification-topbar-button-renderer,
 /* all suggested videos except first two rows */
 #contents.ytd-rich-grid-renderer > *:nth-child(n+3)
 {
     display: none !important;
+}
+
+/* blur video thumbnails */
+img.yt-core-image
+{
+    filter: blur(5px) !important;
 }

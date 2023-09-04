@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Focus Mode",
-    "description": "Enable focus mode on Chrome's official Extensions and Chrome Web Store documentation.",
-    "version": "1.0",
+    "name": "MindfulYT",
+    "description": "Chrome extension that makes browsing YouTube more productive, relaxing, and intentional.",
+    "version": "1.1",
     "icons": {
         "16": "images/icon-16.png",
         "32": "images/icon-32.png",
@@ -21,13 +21,5 @@
         }
     },
     "permissions": ["activeTab", "scripting"],
-    "host_permissions": ["https://www.youtube.com/*"],
-    "commands": {
-        "_execute_action": {
-            "suggested_key": {
-                "default": "Ctrl+B",
-                "mac": "Command+B"
-            }
-        }
-    }
+    "host_permissions": ["https://www.youtube.com/*"]
 }

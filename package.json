@@ -1,5 +1,5 @@
 {
-  "name": "focus-mode",
+  "name": "mindful-yt",
   "version": "1.0.0",
   "description": "Chrome extension that makes browsing YouTube more productive, relaxing, and intentional.",
   "main": "dist/background.js",
