@@ -13,11 +13,11 @@ chrome.runtime.onInstalled.addListener(() => {
         text: "OFF",
     });
 });
-const extensions = 'https://developer.chrome.com/docs/extensions';
-const webstore = 'https://developer.chrome.com/docs/webstore';
+const youtube = 'https://www.youtube.com/';
 chrome.action.onClicked.addListener((tab) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
-    if (((_a = tab.url) === null || _a === void 0 ? void 0 : _a.startsWith(extensions)) || ((_b = tab.url) === null || _b === void 0 ? void 0 : _b.startsWith(webstore))) {
+    var _a;
+    if ((_a = tab.url) === null || _a === void 0 ? void 0 : _a.startsWith(youtube)) {
+        console.log(tab);
         // Retrieve the action badge to check if the extension is 'ON' or 'OFF'
         const prevState = yield chrome.action.getBadgeText({ tabId: tab.id });
         // Next state will always be the opposite

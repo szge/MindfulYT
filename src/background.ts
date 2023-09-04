@@ -4,11 +4,11 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 });
 
-const extensions = 'https://developer.chrome.com/docs/extensions'
-const webstore = 'https://developer.chrome.com/docs/webstore'
+const youtube = 'https://www.youtube.com/'
 
 chrome.action.onClicked.addListener(async (tab) => {
-    if (tab.url?.startsWith(extensions) || tab.url?.startsWith(webstore)) {
+    if (tab.url?.startsWith(youtube)) {
+        console.log(tab);
         // Retrieve the action badge to check if the extension is 'ON' or 'OFF'
         const prevState = await chrome.action.getBadgeText({ tabId: tab.id });
         // Next state will always be the opposite

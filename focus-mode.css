@@ -1,4 +1,4 @@
-body > .scaffold > :is(top-nav, navigation-rail, side-nav, footer),
+/* body > .scaffold > :is(top-nav, navigation-rail, side-nav, footer),
 main > :not(:last-child),
 main > :last-child > navigation-tree,
 main .toc-container {
@@ -8,4 +8,20 @@ main .toc-container {
 main > :last-child {
     margin-top: min(10vmax, 10rem);
     margin-bottom: min(10vmax, 10rem);
+} */
+
+/* SHORTS */
+/* small view */
+ytd-mini-guide-renderer > #items [aria-label="Shorts"],
+/* expanded view */
+ytd-guide-renderer > #sections > :first-child > #items > :has(a[title="Shorts"]),
+/* search */
+ytd-item-section-renderer > #contents > :not(ytd-video-renderer),
+/* remove all shorts suggestions */
+ytd-video-renderer:has(> #dismissible > ytd-thumbnail > #thumbnail > #overlays > ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"]),
+/* type */
+yt-chip-cloud-chip-renderer:has(> yt-formatted-string[title="Shorts"])
+
+{
+    display: none !important;
 }
