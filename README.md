@@ -39,6 +39,7 @@ Avoid distractions on YouTube by blurring the thumbnails on the homepage.
 - [ ] Block playing another video until current one is complete or 30 seconds has passed
 - [ ] Monetization through GitHub Sponsors program and Patreon
 - [ ] Block video until user types out a good explanation for why they want to watch a YouTube video, use OpenAI or other API
+- [ ] Add button to show YT comments
 
 ## Contributing and Redistribution
 This repo is accepting PRs and feature requests. That being said, you are not allowed to redistribute it through any means.
