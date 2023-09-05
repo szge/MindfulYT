@@ -9,9 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.action.setBadgeText({
-        text: "ON",
-    });
+    setEnabled(true);
 });
 const YOUTUBE = "https://www.youtube.com/";
 const SHORTS = "https://www.youtube.com/shorts";
@@ -20,27 +18,20 @@ const SHORTS_CSS = ["styles/nuke-shorts.css", "styles/shorts.css", "styles/focus
 // automatically turn on the extension
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === "complete") {
-        console.log("tab updated");
         update(tab);
     }
 });
 chrome.action.onClicked.addListener((tab) => __awaiter(void 0, void 0, void 0, function* () {
-    const prevState = yield chrome.action.getBadgeText({ tabId: tab.id });
-    const nextState = prevState === "ON" ? "OFF" : "ON";
-    yield chrome.action.setBadgeText({
-        tabId: tab.id,
-        text: nextState,
-    });
+    console.log("clicked");
+    const prevState = yield getEnabled();
+    yield setEnabled(!prevState);
     update(tab);
 }));
 function update(tab) {
     var _a, _b, _c, _d;
     return __awaiter(this, void 0, void 0, function* () {
         if (((_a = tab.url) === null || _a === void 0 ? void 0 : _a.startsWith(YOUTUBE)) && tab.id !== undefined) {
-            // get the current state of the extension
-            const currentState = yield chrome.action.getBadgeText({
-                tabId: tab.id,
-            });
+            const currentState = (yield getEnabled()) ? "ON" : "OFF";
             if ((_b = tab.url) === null || _b === void 0 ? void 0 : _b.startsWith(SHORTS)) {
                 if (currentState === "ON") {
                     // Insert the CSS file when the user turns the extension on
@@ -77,5 +68,21 @@ function update(tab) {
                 }
             }
         }
+    });
+}
+function setEnabled(enabled) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield chrome.storage.sync.set({ enabled });
+        // update the badge
+        yield chrome.action.setBadgeText({
+            text: enabled ? "ON" : "OFF",
+        });
+    });
+}
+function getEnabled() {
+    return new Promise((resolve) => {
+        chrome.storage.sync.get("enabled", (result) => {
+            resolve(result.enabled);
+        });
     });
 }

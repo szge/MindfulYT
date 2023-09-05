@@ -1,7 +1,5 @@
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.action.setBadgeText({
-        text: "ON",
-    });
+    setEnabled(true);
 });
 
 const YOUTUBE = "https://www.youtube.com/";
@@ -12,29 +10,20 @@ const SHORTS_CSS = ["styles/nuke-shorts.css", "styles/shorts.css", "styles/focus
 // automatically turn on the extension
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === "complete") {
-        console.log("tab updated")
         update(tab);
     }
 });
 
 chrome.action.onClicked.addListener(async (tab) => {
-    const prevState = await chrome.action.getBadgeText({ tabId: tab.id });
-    const nextState = prevState === "ON" ? "OFF" : "ON";
-
-    await chrome.action.setBadgeText({
-        tabId: tab.id,
-        text: nextState,
-    });
-
+    console.log("clicked");
+    const prevState = await getEnabled();
+    await setEnabled(!prevState);
     update(tab);
 });
 
 async function update(tab: chrome.tabs.Tab) {
     if (tab.url?.startsWith(YOUTUBE) && tab.id !== undefined) {
-        // get the current state of the extension
-        const currentState = await chrome.action.getBadgeText({
-            tabId: tab.id,
-        });
+        const currentState = await getEnabled() ? "ON" : "OFF";
 
         if (tab.url?.startsWith(SHORTS)) {
             if (currentState === "ON") {
@@ -69,4 +58,20 @@ async function update(tab: chrome.tabs.Tab) {
             }
         }
     }
+}
+
+async function setEnabled(enabled: boolean) {
+    await chrome.storage.sync.set({ enabled });
+    // update the badge
+    await chrome.action.setBadgeText({
+        text: enabled ? "ON" : "OFF",
+    });
+}
+
+function getEnabled(): Promise<boolean> {
+    return new Promise((resolve) => {
+        chrome.storage.sync.get("enabled", (result) => {
+            resolve(result.enabled);
+        });
+    });
 }

@@ -1,25 +1,26 @@
 {
-  "name": "mindful-yt",
-  "version": "1.0.0",
-  "description": "Chrome extension that makes browsing YouTube more productive, relaxing, and intentional.",
-  "main": "dist/background.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p . -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/szge/MindfulYT.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/szge/MindfulYT/issues"
-  },
-  "homepage": "https://github.com/szge/MindfulYT#readme",
-  "devDependencies": {
-    "@types/chrome": "^0.0.244",
-    "typescript": "^5.2.2"
-  }
+    "name": "mindful-yt",
+    "version": "1.0.0",
+    "description": "Chrome extension that makes browsing YouTube more productive, relaxing, and intentional.",
+    "main": "dist/background.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc -p . -w",
+        "package": "package.bat"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/szge/MindfulYT.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/szge/MindfulYT/issues"
+    },
+    "homepage": "https://github.com/szge/MindfulYT#readme",
+    "devDependencies": {
+        "@types/chrome": "^0.0.244",
+        "typescript": "^5.2.2"
+    }
 }

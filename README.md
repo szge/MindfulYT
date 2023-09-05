@@ -22,12 +22,14 @@ Remove temptations, distraction, and optionality by having a focused homepage wi
 
 Avoid distractions on YouTube by blurring the thumbnails on the homepage.
 
+
 ![Thumbnails before and after](images/blur%20thumbnails.png "Thumbnails before and after")
 
 ## Development
 1. `npm i` to install npm packages
 2. `tsc` (to manually transpile) or `npm run build` (to auto transpile on save) in the main directory to transpile TS to JS
 3. Load unpacked extension in [Chrome](chrome://extensions) (chrome://extensions) or [Edge](edge://extensions) (edge://extensions)
+4. To package for release, run `npm run package` in the main directory (runs `package.bat` on Windows) and zip the `package` folder
 
 ## Devlog
 - [x] Remove unnecessary sidebar sections
